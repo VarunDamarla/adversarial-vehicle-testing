@@ -1,15 +1,15 @@
 [tool.poetry]
-name = "project-name"
+name = "adversarial-vehicle-testing"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Varun Damarla <vfd5089@psu.edu>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
 name_of_your_binary = 'project_name.cli:cli'
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.9"
 click = "^8.1.7"
 loguru = "^0.7.2"
 
