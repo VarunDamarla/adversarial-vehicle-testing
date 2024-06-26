@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "adversarial-vehicle-testing"
+name = "adversarial_vehicle_testing"
 version = "0.1.0"
 description = ""
 authors = ["Varun Damarla <vfd5089@psu.edu>"]

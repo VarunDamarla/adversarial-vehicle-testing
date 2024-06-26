@@ -7,7 +7,7 @@ import sys
 import click
 from loguru import logger
 
-from project_name.example import (
+from adversarial_vehicle_testing.example import (
     double,
     triple,
 )
