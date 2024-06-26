@@ -1,4 +1,4 @@
-from project_name.example import double, triple
+from adversarial_vehicle_testing.example import double, triple
 
 
 def test_double() -> None:
