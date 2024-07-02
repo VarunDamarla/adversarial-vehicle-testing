@@ -248,6 +248,7 @@ class DAVE2v3(nn.Module):
         x = self.conv3(x)
         x = F.relu(x)
         x = self.pool3(x)
+        # print(x.shape)
         x = x.flatten(1)
         x = self.lin1(x)
         x = F.relu(x)
