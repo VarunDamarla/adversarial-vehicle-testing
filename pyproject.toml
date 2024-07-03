@@ -33,7 +33,7 @@ select = [
     "ALL",  # includes all rules (including new ones)
 ]
 exclude = [
-    "adversarial-vehicle-testing/src/adversarial_vehicle_testing/car/DAVE2pytorch.py"
+    adversarial-vehicle-testing/src/adversarial_vehicle_testing/car/DAVE2pytorch.py
 ]
 
 extend-ignore = [
