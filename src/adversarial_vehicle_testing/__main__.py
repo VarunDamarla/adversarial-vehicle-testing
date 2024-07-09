@@ -1,4 +1,4 @@
-import project_name.cli
+import adversarial_vehicle_testing.cli
 
 if __name__ == "__main__":
-    project_name.cli.cli()
+    adversarial_vehicle_testing.cli.cli()
