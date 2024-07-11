@@ -9,7 +9,7 @@ readme = "README.md"
 name_of_your_binary = 'project_name.cli:cli'
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 click = "^8.1.7"
 loguru = "^0.7.2"
 

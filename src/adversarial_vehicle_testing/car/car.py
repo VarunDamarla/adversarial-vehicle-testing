@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import cv2
 import matplotlib.pyplot as plt
 import torch
@@ -18,7 +20,8 @@ if torch.cuda.is_available():
     torch.cuda.set_device(device)
 else:
     device = torch.device("cpu")
-model_path = "/home/vdamarla/adversarial-vehicle-testing/src/adversarial_vehicle_testing/car/DAVE2v3.pt"
+cwd = str(Path.cwd())
+model_path = cwd + "/DAVE2v3.pt"
 model = torch.load(model_path, map_location=torch.device("cuda")).eval()
 
 def render_car_translation_pert(x_change: float, y_change: float, z_change: float, device: torch.device) -> str:
@@ -46,7 +49,7 @@ def render_car_translation_pert(x_change: float, y_change: float, z_change: floa
 
     device = fragments.pix_to_face.device
     is_background = fragments.pix_to_face[..., 0] < 0  # (N, H, W)
-    image_path = "/home/vdamarla/adversarial-vehicle-testing/src/adversarial_vehicle_testing/car/straight_scene.jpg"
+    image_path = cwd + "/straight_scene.jpg"
     background = torch.tensor(cv2.imread(image_path), device=device).float() / 255.0
     background_comp = background.unsqueeze(0) * is_background.unsqueeze(-1)
     is_background_comp = torch.flip(images[...,:3], [-1]) * torch.logical_not(is_background.unsqueeze(-1))
@@ -82,7 +85,7 @@ def main() -> None:
     for i in range(14):
         results = []
         results.append(render_car_translation_pert(i, 0, 0, device))
-        name = f"/home/vdamarla/adversarial-vehicle-testing/src/adversarial_vehicle_testing/car/{results[-1]}"
+        name = f"{cwd}/{results[-1]}"
         print(f"TestP{i}: {generate_steer_tensor(name, device, model)}")
 
 main()
