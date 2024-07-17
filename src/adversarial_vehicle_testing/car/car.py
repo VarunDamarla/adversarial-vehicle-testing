@@ -75,7 +75,7 @@ def generate_steer_tensor(file_name: str, device: torch.device, model: DAVE2v3) 
     pert_angle = model(resized_pert)
     return pert_angle
 
-def generate_mlt_translation_tensors(n:int, c_x:int, c_y:int, c_z:int, d:torch.device, m:DAVE2v3) -> list[torch.Tensor]:
+def generate_mlt_translations(n: int, c_x: int, c_y: int, c_z: int, d: torch.device, m:DAVE2v3) -> "list[torch.Tensor]":
     tensors = []
     for i in range(n):
         results = []
@@ -94,7 +94,7 @@ def generate_original_steer() -> torch.Tensor:
 def generate_steer_gradient(device: torch.device, model: DAVE2v3, num: int, x:int, y:int, z:int) -> None:
     orig_angle: torch.Tensor
     orig_angle = generate_original_steer()
-    data = generate_mlt_translation_tensors(num, x, y, z, device, model)
+    data = generate_mlt_translations(num, x, y, z, device, model)
     model.zero_grad()
     losses = []
     for p in range(num):
