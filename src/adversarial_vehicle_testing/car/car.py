@@ -75,17 +75,36 @@ def generate_steer_tensor(file_name: str, device: torch.device, model: DAVE2v3) 
     pert_angle = model(resized_pert)
     return pert_angle
 
-# Testing gradient descent
-def generate_gradient(device: torch.device, model: DAVE2v3) -> None:
+def generate_mlt_translation_tensors(n:int, c_x:int, c_y:int, c_z:int, d:torch.device, m:DAVE2v3) -> list[torch.Tensor]:
+    tensors = []
+    for i in range(n):
+        results = []
+        x = c_x * i
+        y = c_y * i
+        z = c_z * i
+        results.append(render_car_translation_pert(x, y, z, d))
+        name = f"{cwd}/{results[-1]}"
+        tensor = generate_steer_tensor(name, d, m)
+        tensors.append(tensor)
+    return tensors
 
-    return
+def generate_original_steer() -> torch.Tensor:
+    return generate_steer_tensor(render_car_translation_pert(0, 0, 0, device), device, model)
+
+def generate_steer_gradient(device: torch.device, model: DAVE2v3, num: int, x:int, y:int, z:int) -> None:
+    orig_angle: torch.Tensor
+    orig_angle = generate_original_steer()
+    data = generate_mlt_translation_tensors(num, x, y, z, device, model)
+    model.zero_grad()
+    losses = []
+    for p in range(num):
+        losses.append(-1 * abs(orig_angle - data[p]))
+        print(f"LossP{p}: {losses[-1]}")
+        losses[-1].backward(retain_graph=True)
+        print(f"GradientP{p}: {data[p].retain_grad()}")
 
 # Understanding how the translation works
 def main() -> None:
-    for i in range(14):
-        results = []
-        results.append(render_car_translation_pert(i, 0, 0, device))
-        name = f"{cwd}/{results[-1]}"
-        print(f"TestP{i}: {generate_steer_tensor(name, device, model)}")
+    generate_steer_gradient(device, model, 10, 1, 0, 0)
 
 main()
