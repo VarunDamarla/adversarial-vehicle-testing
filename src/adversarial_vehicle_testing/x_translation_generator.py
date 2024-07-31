@@ -2,7 +2,6 @@ import csv
 from pathlib import Path
 
 import cv2
-import matplotlib.pyplot as plt
 import torch
 import torchvision.transforms as transform
 from pytorch3d.io import load_objs_as_meshes
@@ -28,8 +27,8 @@ if "/src/adversarial_vehicle_testing/" not in cwd:
 model_path = cwd + "DAVE2v3.pt"
 model = torch.load(model_path, map_location=torch.device("cuda")).eval()
 
-i = -20
-end = 25
+i = -20.0
+end = 25.0
 x_step = 0.001
 rows = []
 while i < end + x_step:
