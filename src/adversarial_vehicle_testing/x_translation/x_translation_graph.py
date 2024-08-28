@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 cwd = str(Path.cwd())
-if "/src/adversarial_vehicle_testing/" not in cwd:
-    cwd += "/src/adversarial_vehicle_testing/"
+if "/src/adversarial_vehicle_testing/x_translation/" not in cwd:
+    cwd += "/src/adversarial_vehicle_testing/x_translation/"
 
 # Reading into CSV File
 xs = []

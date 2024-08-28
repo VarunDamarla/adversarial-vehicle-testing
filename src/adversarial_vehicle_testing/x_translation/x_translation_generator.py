@@ -14,16 +14,14 @@ from pytorch3d.renderer import (
     look_at_view_transform,
 )
 
-DIR_HERE = Path(__file__).resolve().parent
-
 if torch.cuda.is_available():
     device = torch.device("cuda:0")
     torch.cuda.set_device(device)
 else:
     device = torch.device("cpu")
 cwd = str(Path.cwd())
-if "/src/adversarial_vehicle_testing/" not in cwd:
-    cwd += "/src/adversarial_vehicle_testing/"
+if "/src/adversarial_vehicle_testing/x_translation/" not in cwd:
+    cwd += "/src/adversarial_vehicle_testing/x_translation/"
 model_path = cwd + "DAVE2v3.pt"
 model = torch.load(model_path, map_location=torch.device("cuda")).eval()
 
